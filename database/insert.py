@@ -16,4 +16,4 @@ def insertNote(str_title: str, str_desc: str | None = None, str_created: str | N
         session.commit()
         session.close()
 
-        return
+        return stmt
