@@ -1,0 +1,39 @@
+syntax="proto3";
+
+package organiza_ai;
+
+service NotesServices{
+    rpc getNote(SearchNoteRequest) returns (NoteMessage);
+    rpc getAllNotes(empty) returns (NoteResponse);
+    rpc addNote(AddNote) returns (empty);
+    rpc removeNote(SearchNoteRequest) returns (NoteMessage);
+    rpc editNote(NoteMessage) returns (NoteMessage);
+}
+message empty{
+
+}
+
+message NoteMessage{
+    int64 id = 1;
+    string title = 2;
+    string desc = 3;
+    string created = 4;
+    string deadline = 5;
+}
+
+message AddNote{
+    string title = 1;
+    string desc = 2;
+    string created = 3;
+    string deadline = 4;
+}
+message NoteResponse{
+    repeated NoteMessage note = 1;
+}
+
+message SearchNoteRequest{
+    int64 id = 1;
+}
+
+// python3 -m grpc_tools.protoc --proto_path=. ./notes_service.proto --python_out=. --grpc_python_out=.
+//protoc --proto_path=lib/api/ --dart_out=grpc:./lib/api/generated ./lib/api/notes_service.proto
