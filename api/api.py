@@ -1,7 +1,8 @@
 from concurrent import futures
 import grpc
-from api.generated import notes_service_pb2_grpc
+from api.generated import notes_service_pb2_grpc, notes_service_pb2
 from database.insert import insertNote
+from database.select import selectAllNotes
 
 
 class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
@@ -15,6 +16,12 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
                    str_deadLine=request.deadLine)
 
     def getAllNotes(self, request, context):
+        # Need implementation.
+        allNotes = selectAllNotes()
+        message = []
+        for note in allNotes:
+            auxiliar = notes_service_pb2.NoteResponse()
+
         return super().getAllNotes(request, context)
 
     def removeNote(self, request, context):
