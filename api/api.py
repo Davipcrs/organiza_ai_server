@@ -15,12 +15,24 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
                    str_created=request.created,
                    str_deadLine=request.deadLine)
 
+        return notes_service_pb2.empty()
+
     def getAllNotes(self, request, context):
         # Need implementation.
         allNotes = selectAllNotes()
-        message = []
+
+        message = notes_service_pb2.NoteResponse()
         for note in allNotes:
-            auxiliar = notes_service_pb2.NoteResponse()
+            auxiliar = notes_service_pb2.NoteMessage(
+                id=note[0],
+                title=note[1],
+                desc=note[2],
+                created=note[3],
+                deadLine=note[4]
+            )
+            message.note.append(auxiliar)
+
+        return message
 
         return super().getAllNotes(request, context)
 
