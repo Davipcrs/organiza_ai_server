@@ -32,7 +32,7 @@ class NotesServicesStub(object):
         self.removeNote = channel.unary_unary(
                 '/organiza_ai.NotesServices/removeNote',
                 request_serializer=api_dot_generated_dot_notes__service__pb2.SearchNoteRequest.SerializeToString,
-                response_deserializer=api_dot_generated_dot_notes__service__pb2.NoteMessage.FromString,
+                response_deserializer=api_dot_generated_dot_notes__service__pb2.empty.FromString,
                 )
         self.editNote = channel.unary_unary(
                 '/organiza_ai.NotesServices/editNote',
@@ -95,7 +95,7 @@ def add_NotesServicesServicer_to_server(servicer, server):
             'removeNote': grpc.unary_unary_rpc_method_handler(
                     servicer.removeNote,
                     request_deserializer=api_dot_generated_dot_notes__service__pb2.SearchNoteRequest.FromString,
-                    response_serializer=api_dot_generated_dot_notes__service__pb2.NoteMessage.SerializeToString,
+                    response_serializer=api_dot_generated_dot_notes__service__pb2.empty.SerializeToString,
             ),
             'editNote': grpc.unary_unary_rpc_method_handler(
                     servicer.editNote,
@@ -176,7 +176,7 @@ class NotesServices(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/organiza_ai.NotesServices/removeNote',
             api_dot_generated_dot_notes__service__pb2.SearchNoteRequest.SerializeToString,
-            api_dot_generated_dot_notes__service__pb2.NoteMessage.FromString,
+            api_dot_generated_dot_notes__service__pb2.empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

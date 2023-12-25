@@ -2,12 +2,16 @@ from concurrent import futures
 import grpc
 from api.generated import notes_service_pb2_grpc, notes_service_pb2
 from database.insert import insertNote
-from database.select import selectAllNotes
+from database.select import selectAllNotes, selectOneNote
+from database.delete import deleteNote
 
 
 class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
     def getNote(self, request, context):
-        return super().getNote(request, context)
+        result = selectOneNote(request.id)[0]
+        note = notes_service_pb2.NoteMessage(
+            id=result[0], title=result[1], desc=result[2], created=result[3], deadLine=result[4])
+        return note
 
     def addNote(self, request, context):
         insertNote(str_title=request.title,
@@ -34,10 +38,9 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
 
         return message
 
-        return super().getAllNotes(request, context)
-
     def removeNote(self, request, context):
-        return super().removeNote(request, context)
+        deleteNote(id=request.id)
+        return notes_service_pb2.empty()
 
     def editNote(self, request, context):
         return super().editNote(request, context)

@@ -1,7 +1,6 @@
 from database.utils import BASE
 from sqlalchemy.orm import mapped_column, Mapped
 from sqlalchemy import Integer, String
-from pydantic import BaseModel
 
 
 class NoteModel(BASE):

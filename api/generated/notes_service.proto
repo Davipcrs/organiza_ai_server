@@ -6,7 +6,7 @@ service NotesServices{
     rpc getNote(SearchNoteRequest) returns (NoteMessage);
     rpc getAllNotes(empty) returns (NoteResponse);
     rpc addNote(AddNoteMessage) returns (empty);
-    rpc removeNote(SearchNoteRequest) returns (NoteMessage);
+    rpc removeNote(SearchNoteRequest) returns (empty);
     rpc editNote(NoteMessage) returns (NoteMessage);
 }
 message empty{
