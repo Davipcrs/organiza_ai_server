@@ -4,6 +4,7 @@ from api.generated import notes_service_pb2_grpc, notes_service_pb2
 from database.insert import insertNote
 from database.select import selectAllNotes, selectOneNote
 from database.delete import deleteNote
+from database.update import updateNote
 
 
 class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
@@ -43,7 +44,15 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
         return notes_service_pb2.empty()
 
     def editNote(self, request, context):
-        return super().editNote(request, context)
+        updateNote(int_id=request.id,
+                   str_title=request.title,
+                   str_desc=request.desc,
+                   str_created=request.created,
+                   str_deadLine=request.deadLine)
+        result = selectOneNote(request.id)[0]
+        note = notes_service_pb2.NoteMessage(
+            id=result[0], title=result[1], desc=result[2], created=result[3], deadLine=result[4])
+        return note
 
 
 def serve():

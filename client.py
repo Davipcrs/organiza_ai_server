@@ -14,6 +14,7 @@ print(type(stub.getAllNotes(notes_service_pb2.empty())))
 
 aux = stub.getAllNotes(notes_service_pb2.empty())
 # aux.note.extend()
+"""
 for note in aux.note:
     print(note.title)
 aux = stub.getNote(notes_service_pb2.SearchNoteRequest(id=1))
@@ -21,3 +22,6 @@ print(aux.deadLine)
 
 
 stub.removeNote(notes_service_pb2.SearchNoteRequest(id=1))
+"""
+print(stub.editNote(notes_service_pb2.NoteMessage(
+    id=2, title="Uhullll", desc="etain", created="sad", deadLine="kk")))
