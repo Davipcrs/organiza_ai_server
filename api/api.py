@@ -1,6 +1,5 @@
 from concurrent import futures
 import grpc
-import grpc_reflection.v1alpha.reflection as reflection
 from api.generated import notes_service_pb2_grpc, notes_service_pb2
 from database.insert import insertNote
 from database.select import selectAllNotes, selectOneNote
@@ -60,9 +59,6 @@ def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notes_service_pb2_grpc.add_NotesServicesServicer_to_server(
         NotesServicesServicer(), server)
-    SERVICE_NAMES = (notes_service_pb2.DESCRIPTOR.services_by_name["NotesServices"].full_name,
-                     reflection.SERVICE_NAME,)
-    reflection.enable_server_reflection(SERVICE_NAMES, server)
     server.add_insecure_port("0.0.0.0:50051")
     server.start()
     server.wait_for_termination()
