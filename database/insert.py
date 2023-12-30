@@ -10,10 +10,10 @@ def insertNote(str_title: str, str_desc: str | None = None, str_created: str | N
         stmt = insert(NoteModel).values(str_title=str_title,
                                         str_desc=str_desc,
                                         str_created=str_created,
-                                        str_deadLine=str_deadLine)
+                                        str_deadLine=str_deadLine).returning(NoteModel.int_id)
 
-        session.execute(statement=stmt)
+        rows = session.execute(statement=stmt)
         session.commit()
         session.close()
 
-        return stmt
+        return rows.all()

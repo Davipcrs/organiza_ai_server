@@ -15,12 +15,12 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
         return note
 
     def addNote(self, request, context):
-        insertNote(str_title=request.title,
-                   str_desc=request.desc,
-                   str_created=request.created,
-                   str_deadLine=request.deadLine)
+        id = insertNote(str_title=request.title,
+                        str_desc=request.desc,
+                        str_created=request.created,
+                        str_deadLine=request.deadLine)[0][0]
 
-        return notes_service_pb2.empty()
+        return notes_service_pb2.SearchNoteRequest(id=id)
 
     def getAllNotes(self, request, context):
         # Need implementation.
