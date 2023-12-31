@@ -6,7 +6,8 @@ from sqlalchemy import Integer, String
 class NoteModel(BASE):
     __tablename__ = "notes"
 
-    int_id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    int_id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, autoincrement=True)
     str_title: Mapped[str] = mapped_column(String())
     str_desc: Mapped[str] = mapped_column(String())
     str_created: Mapped[str] = mapped_column(String())

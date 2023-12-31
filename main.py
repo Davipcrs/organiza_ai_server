@@ -1,9 +1,8 @@
-from database.insert import insertNote
-from datetime import datetime
 from api.api import serve
-from database.select import selectAllNotes, selectOneNote
+from database.utils import initDatabase
 
 if __name__ == "__main__":
+    initDatabase()
     serve()
    # selectAllNotes()
     # a = selectOneNote(1)

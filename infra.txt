@@ -1,0 +1,8 @@
+docker container - Ubuntu server:
+    flutter web application
+    MariaDB database
+    python gRPC API
+    Envoy reverse proxy for the web application
+
+Needed: Enviromental variables for the python and MariaDB credentials
+Needed: Certificate for secure gRPC
