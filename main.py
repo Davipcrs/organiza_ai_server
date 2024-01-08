@@ -1,5 +1,5 @@
 from api.api import serve
-from database.utils import initDatabase
+from database.database import initDatabase
 
 if __name__ == "__main__":
     initDatabase()
