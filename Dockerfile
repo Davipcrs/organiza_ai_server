@@ -1,7 +1,11 @@
 FROM ubuntu:latest
-RUN apt-get update && apt-get upgrade
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get upgrade -y
 RUN mkdir /app
+COPY . /app/
 WORKDIR /app
+
+RUN bash ./install_script.sh
 
 
 ## install nginx
