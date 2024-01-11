@@ -2,14 +2,16 @@ syntax="proto3";
 
 package organiza_ai;
 
+
 service NotesServices{
     rpc getNote(SearchNoteRequest) returns (NoteMessage);
-    rpc getAllNotes(empty) returns (NoteResponse);
+    rpc getAllNotes(emptyTodo) returns (NoteResponse);
     rpc addNote(AddNoteMessage) returns (SearchNoteRequest);
-    rpc removeNote(SearchNoteRequest) returns (empty);
+    rpc removeNote(SearchNoteRequest) returns (emptyTodo);
     rpc editNote(NoteMessage) returns (NoteMessage);
 }
-message empty{
+
+message emptyTodo{
 
 }
 

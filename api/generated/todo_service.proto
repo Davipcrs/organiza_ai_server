@@ -1,0 +1,38 @@
+syntax="proto3";
+
+package organiza_ai;
+
+service TodoServices{
+    rpc getTodo(SearchTodoMessage) returns (TodoMessage);
+    rpc getAllTodo(empty) returns (TodoResponse);
+    rpc addTodo(AddTodoMessage) returns (SearchTodoMessage);
+    rpc editTodo(TodoMessage) returns (TodoMessage);
+    rpc deleteTodo(SearchTodoMessage) returns (empty);
+}
+
+
+message empty{
+
+}
+
+message TodoMessage{
+    int64 id = 1;
+    string title = 2;
+    string deadLine = 3;
+
+}
+
+message TodoResponse{
+    repeated TodoMessage todo = 1;
+
+}
+
+message AddTodoMessage{
+    string title = 1;
+    string deadLine = 2;
+
+}
+
+message SearchTodoMessage{
+    int64 id = 1;
+}
