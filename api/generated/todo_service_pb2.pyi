@@ -10,14 +10,12 @@ class empty(_message.Message):
     def __init__(self) -> None: ...
 
 class TodoMessage(_message.Message):
-    __slots__ = ("id", "title", "deadLine")
+    __slots__ = ("id", "title")
     ID_FIELD_NUMBER: _ClassVar[int]
     TITLE_FIELD_NUMBER: _ClassVar[int]
-    DEADLINE_FIELD_NUMBER: _ClassVar[int]
     id: int
     title: str
-    deadLine: str
-    def __init__(self, id: _Optional[int] = ..., title: _Optional[str] = ..., deadLine: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[int] = ..., title: _Optional[str] = ...) -> None: ...
 
 class TodoResponse(_message.Message):
     __slots__ = ("todo",)
@@ -26,12 +24,10 @@ class TodoResponse(_message.Message):
     def __init__(self, todo: _Optional[_Iterable[_Union[TodoMessage, _Mapping]]] = ...) -> None: ...
 
 class AddTodoMessage(_message.Message):
-    __slots__ = ("title", "deadLine")
+    __slots__ = ("title",)
     TITLE_FIELD_NUMBER: _ClassVar[int]
-    DEADLINE_FIELD_NUMBER: _ClassVar[int]
     title: str
-    deadLine: str
-    def __init__(self, title: _Optional[str] = ..., deadLine: _Optional[str] = ...) -> None: ...
+    def __init__(self, title: _Optional[str] = ...) -> None: ...
 
 class SearchTodoMessage(_message.Message):
     __slots__ = ("id",)

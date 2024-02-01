@@ -1,10 +1,27 @@
 from concurrent import futures
 import grpc
-from api.generated import notes_service_pb2_grpc, notes_service_pb2
+from api.generated import notes_service_pb2_grpc, notes_service_pb2, todo_service_pb2, todo_service_pb2_grpc
 from database.insert import insertNote
 from database.select import selectAllNotes, selectOneNote
 from database.delete import deleteNote
 from database.update import updateNote
+
+
+class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
+    def getTodo(self, request, context):
+        return super().getTodo(request, context)
+
+    def getAllTodo(self, request, context):
+        return super().getAllTodo(request, context)
+
+    def addTodo(self, request, context):
+        return super().addTodo(request, context)
+
+    def editTodo(self, request, context):
+        return super().editTodo(request, context)
+
+    def deleteTodo(self, request, context):
+        return super().deleteTodo(request, context)
 
 
 class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
@@ -59,6 +76,8 @@ def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notes_service_pb2_grpc.add_NotesServicesServicer_to_server(
         NotesServicesServicer(), server)
+    todo_service_pb2_grpc.add_TodoServicesServicer_to_server(
+        TodoServicesServicer(), server)
     server.add_insecure_port("0.0.0.0:50051")
     server.start()
     server.wait_for_termination()
