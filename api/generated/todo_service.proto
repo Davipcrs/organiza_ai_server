@@ -7,7 +7,7 @@ service TodoServices{
     rpc getAllTodo(empty) returns (TodoResponse);
     rpc addTodo(AddTodoMessage) returns (SearchTodoMessage);
     rpc editTodo(TodoMessage) returns (TodoMessage);
-    rpc deleteTodo(SearchTodoMessage) returns (empty);
+    rpc removeTodo(SearchTodoMessage) returns (empty);
 }
 
 

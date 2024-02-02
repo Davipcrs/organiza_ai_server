@@ -34,8 +34,8 @@ class TodoServicesStub(object):
                 request_serializer=api_dot_generated_dot_todo__service__pb2.TodoMessage.SerializeToString,
                 response_deserializer=api_dot_generated_dot_todo__service__pb2.TodoMessage.FromString,
                 )
-        self.deleteTodo = channel.unary_unary(
-                '/organiza_ai.TodoServices/deleteTodo',
+        self.removeTodo = channel.unary_unary(
+                '/organiza_ai.TodoServices/removeTodo',
                 request_serializer=api_dot_generated_dot_todo__service__pb2.SearchTodoMessage.SerializeToString,
                 response_deserializer=api_dot_generated_dot_todo__service__pb2.empty.FromString,
                 )
@@ -68,7 +68,7 @@ class TodoServicesServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def deleteTodo(self, request, context):
+    def removeTodo(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -97,8 +97,8 @@ def add_TodoServicesServicer_to_server(servicer, server):
                     request_deserializer=api_dot_generated_dot_todo__service__pb2.TodoMessage.FromString,
                     response_serializer=api_dot_generated_dot_todo__service__pb2.TodoMessage.SerializeToString,
             ),
-            'deleteTodo': grpc.unary_unary_rpc_method_handler(
-                    servicer.deleteTodo,
+            'removeTodo': grpc.unary_unary_rpc_method_handler(
+                    servicer.removeTodo,
                     request_deserializer=api_dot_generated_dot_todo__service__pb2.SearchTodoMessage.FromString,
                     response_serializer=api_dot_generated_dot_todo__service__pb2.empty.SerializeToString,
             ),
@@ -181,7 +181,7 @@ class TodoServices(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def deleteTodo(request,
+    def removeTodo(request,
             target,
             options=(),
             channel_credentials=None,
@@ -191,7 +191,7 @@ class TodoServices(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/organiza_ai.TodoServices/deleteTodo',
+        return grpc.experimental.unary_unary(request, target, '/organiza_ai.TodoServices/removeTodo',
             api_dot_generated_dot_todo__service__pb2.SearchTodoMessage.SerializeToString,
             api_dot_generated_dot_todo__service__pb2.empty.FromString,
             options, channel_credentials,

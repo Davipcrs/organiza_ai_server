@@ -3,8 +3,8 @@ import grpc
 from api.generated import notes_service_pb2_grpc, notes_service_pb2, todo_service_pb2, todo_service_pb2_grpc
 from database.insert import insertNote, insertTodo
 from database.select import selectAllNotes, selectAllTodos, selectOneNote, selectOneTodo
-from database.delete import deleteNote
-from database.update import updateNote
+from database.delete import deleteNote, deleteTodo
+from database.update import updateNote, updateTodo
 
 
 class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
@@ -27,10 +27,15 @@ class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
         return todo_service_pb2.SearchTodoMessage(id=id)
 
     def editTodo(self, request, context):
-        return super().editTodo(request, context)
+        updateTodo(int_id=request.id,
+                   str_title=request.title)
+        result = selectOneNote(id=request.id)[0]
+        todo = todo_service_pb2.TodoMessage(id=result[0], title=result[1])
+        return todo
 
-    def deleteTodo(self, request, context):
-        return super().deleteTodo(request, context)
+    def removeTodo(self, request, context):
+        deleteTodo(request.id)
+        return todo_service_pb2.empty()
 
 
 class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
