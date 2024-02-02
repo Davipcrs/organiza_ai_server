@@ -1,21 +1,30 @@
 from concurrent import futures
 import grpc
 from api.generated import notes_service_pb2_grpc, notes_service_pb2, todo_service_pb2, todo_service_pb2_grpc
-from database.insert import insertNote
-from database.select import selectAllNotes, selectOneNote
+from database.insert import insertNote, insertTodo
+from database.select import selectAllNotes, selectAllTodos, selectOneNote, selectOneTodo
 from database.delete import deleteNote
 from database.update import updateNote
 
 
 class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
     def getTodo(self, request, context):
-        return super().getTodo(request, context)
+        result = selectOneTodo(request.id)[0]
+        todo = todo_service_pb2.TodoMessage(id=result[0], title=result[1])
+        return todo
 
     def getAllTodo(self, request, context):
-        return super().getAllTodo(request, context)
+        allTodos = selectAllTodos()
+
+        message = todo_service_pb2.TodoResponse()
+        for todo in allTodos:
+            auxiliar = todo_service_pb2.TodoMessage(id=todo[0], title=todo[1])
+            message.todo.append(auxiliar)
+        return message
 
     def addTodo(self, request, context):
-        return super().addTodo(request, context)
+        id = insertTodo(request.title)
+        return todo_service_pb2.SearchTodoMessage(id=id)
 
     def editTodo(self, request, context):
         return super().editTodo(request, context)
@@ -40,7 +49,6 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
         return notes_service_pb2.SearchNoteRequest(id=id)
 
     def getAllNotes(self, request, context):
-        # Need implementation.
         allNotes = selectAllNotes()
 
         message = notes_service_pb2.NoteResponse()
