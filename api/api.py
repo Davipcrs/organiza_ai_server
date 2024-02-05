@@ -23,7 +23,7 @@ class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
         return message
 
     def addTodo(self, request, context):
-        id = insertTodo(request.title)
+        id = insertTodo(request.title)[0][0]
         return todo_service_pb2.SearchTodoMessage(id=id)
 
     def editTodo(self, request, context):
