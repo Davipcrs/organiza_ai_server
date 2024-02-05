@@ -5,7 +5,7 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class empty(_message.Message):
+class emptyTodo(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 

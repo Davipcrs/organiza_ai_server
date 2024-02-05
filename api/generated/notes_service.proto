@@ -5,13 +5,13 @@ package organiza_ai;
 
 service NotesServices{
     rpc getNote(SearchNoteRequest) returns (NoteMessage);
-    rpc getAllNotes(emptyTodo) returns (NoteResponse);
+    rpc getAllNotes(empty) returns (NoteResponse);
     rpc addNote(AddNoteMessage) returns (SearchNoteRequest);
-    rpc removeNote(SearchNoteRequest) returns (emptyTodo);
+    rpc removeNote(SearchNoteRequest) returns (empty);
     rpc editNote(NoteMessage) returns (NoteMessage);
 }
 
-message emptyTodo{
+message empty{
 
 }
 

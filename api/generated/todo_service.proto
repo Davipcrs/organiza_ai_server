@@ -4,14 +4,14 @@ package organiza_ai;
 
 service TodoServices{
     rpc getTodo(SearchTodoMessage) returns (TodoMessage);
-    rpc getAllTodo(empty) returns (TodoResponse);
+    rpc getAllTodo(emptyTodo) returns (TodoResponse);
     rpc addTodo(AddTodoMessage) returns (SearchTodoMessage);
     rpc editTodo(TodoMessage) returns (TodoMessage);
-    rpc removeTodo(SearchTodoMessage) returns (empty);
+    rpc removeTodo(SearchTodoMessage) returns (emptyTodo);
 }
 
 
-message empty{
+message emptyTodo{
 
 }
 

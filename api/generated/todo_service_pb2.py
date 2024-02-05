@@ -14,23 +14,23 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n api/generated/todo_service.proto\x12\x0borganiza_ai\"\x07\n\x05\x65mpty\"(\n\x0bTodoMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05title\x18\x02 \x01(\t\"6\n\x0cTodoResponse\x12&\n\x04todo\x18\x01 \x03(\x0b\x32\x18.organiza_ai.TodoMessage\"\x1f\n\x0e\x41\x64\x64TodoMessage\x12\r\n\x05title\x18\x01 \x01(\t\"\x1f\n\x11SearchTodoMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x32\xda\x02\n\x0cTodoServices\x12\x43\n\x07getTodo\x12\x1e.organiza_ai.SearchTodoMessage\x1a\x18.organiza_ai.TodoMessage\x12;\n\ngetAllTodo\x12\x12.organiza_ai.empty\x1a\x19.organiza_ai.TodoResponse\x12\x46\n\x07\x61\x64\x64Todo\x12\x1b.organiza_ai.AddTodoMessage\x1a\x1e.organiza_ai.SearchTodoMessage\x12>\n\x08\x65\x64itTodo\x12\x18.organiza_ai.TodoMessage\x1a\x18.organiza_ai.TodoMessage\x12@\n\nremoveTodo\x12\x1e.organiza_ai.SearchTodoMessage\x1a\x12.organiza_ai.emptyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n api/generated/todo_service.proto\x12\x0borganiza_ai\"\x0b\n\temptyTodo\"(\n\x0bTodoMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x12\r\n\x05title\x18\x02 \x01(\t\"6\n\x0cTodoResponse\x12&\n\x04todo\x18\x01 \x03(\x0b\x32\x18.organiza_ai.TodoMessage\"\x1f\n\x0e\x41\x64\x64TodoMessage\x12\r\n\x05title\x18\x01 \x01(\t\"\x1f\n\x11SearchTodoMessage\x12\n\n\x02id\x18\x01 \x01(\x03\x32\xe2\x02\n\x0cTodoServices\x12\x43\n\x07getTodo\x12\x1e.organiza_ai.SearchTodoMessage\x1a\x18.organiza_ai.TodoMessage\x12?\n\ngetAllTodo\x12\x16.organiza_ai.emptyTodo\x1a\x19.organiza_ai.TodoResponse\x12\x46\n\x07\x61\x64\x64Todo\x12\x1b.organiza_ai.AddTodoMessage\x1a\x1e.organiza_ai.SearchTodoMessage\x12>\n\x08\x65\x64itTodo\x12\x18.organiza_ai.TodoMessage\x1a\x18.organiza_ai.TodoMessage\x12\x44\n\nremoveTodo\x12\x1e.organiza_ai.SearchTodoMessage\x1a\x16.organiza_ai.emptyTodob\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'api.generated.todo_service_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_EMPTY']._serialized_start=49
-  _globals['_EMPTY']._serialized_end=56
-  _globals['_TODOMESSAGE']._serialized_start=58
-  _globals['_TODOMESSAGE']._serialized_end=98
-  _globals['_TODORESPONSE']._serialized_start=100
-  _globals['_TODORESPONSE']._serialized_end=154
-  _globals['_ADDTODOMESSAGE']._serialized_start=156
-  _globals['_ADDTODOMESSAGE']._serialized_end=187
-  _globals['_SEARCHTODOMESSAGE']._serialized_start=189
-  _globals['_SEARCHTODOMESSAGE']._serialized_end=220
-  _globals['_TODOSERVICES']._serialized_start=223
-  _globals['_TODOSERVICES']._serialized_end=569
+  _globals['_EMPTYTODO']._serialized_start=49
+  _globals['_EMPTYTODO']._serialized_end=60
+  _globals['_TODOMESSAGE']._serialized_start=62
+  _globals['_TODOMESSAGE']._serialized_end=102
+  _globals['_TODORESPONSE']._serialized_start=104
+  _globals['_TODORESPONSE']._serialized_end=158
+  _globals['_ADDTODOMESSAGE']._serialized_start=160
+  _globals['_ADDTODOMESSAGE']._serialized_end=191
+  _globals['_SEARCHTODOMESSAGE']._serialized_start=193
+  _globals['_SEARCHTODOMESSAGE']._serialized_end=224
+  _globals['_TODOSERVICES']._serialized_start=227
+  _globals['_TODOSERVICES']._serialized_end=581
 # @@protoc_insertion_point(module_scope)

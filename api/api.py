@@ -35,7 +35,7 @@ class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
 
     def removeTodo(self, request, context):
         deleteTodo(request.id)
-        return todo_service_pb2.empty()
+        return todo_service_pb2.emptyTodo()
 
 
 class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):

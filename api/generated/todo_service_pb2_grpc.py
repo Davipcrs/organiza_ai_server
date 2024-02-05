@@ -21,7 +21,7 @@ class TodoServicesStub(object):
                 )
         self.getAllTodo = channel.unary_unary(
                 '/organiza_ai.TodoServices/getAllTodo',
-                request_serializer=api_dot_generated_dot_todo__service__pb2.empty.SerializeToString,
+                request_serializer=api_dot_generated_dot_todo__service__pb2.emptyTodo.SerializeToString,
                 response_deserializer=api_dot_generated_dot_todo__service__pb2.TodoResponse.FromString,
                 )
         self.addTodo = channel.unary_unary(
@@ -37,7 +37,7 @@ class TodoServicesStub(object):
         self.removeTodo = channel.unary_unary(
                 '/organiza_ai.TodoServices/removeTodo',
                 request_serializer=api_dot_generated_dot_todo__service__pb2.SearchTodoMessage.SerializeToString,
-                response_deserializer=api_dot_generated_dot_todo__service__pb2.empty.FromString,
+                response_deserializer=api_dot_generated_dot_todo__service__pb2.emptyTodo.FromString,
                 )
 
 
@@ -84,7 +84,7 @@ def add_TodoServicesServicer_to_server(servicer, server):
             ),
             'getAllTodo': grpc.unary_unary_rpc_method_handler(
                     servicer.getAllTodo,
-                    request_deserializer=api_dot_generated_dot_todo__service__pb2.empty.FromString,
+                    request_deserializer=api_dot_generated_dot_todo__service__pb2.emptyTodo.FromString,
                     response_serializer=api_dot_generated_dot_todo__service__pb2.TodoResponse.SerializeToString,
             ),
             'addTodo': grpc.unary_unary_rpc_method_handler(
@@ -100,7 +100,7 @@ def add_TodoServicesServicer_to_server(servicer, server):
             'removeTodo': grpc.unary_unary_rpc_method_handler(
                     servicer.removeTodo,
                     request_deserializer=api_dot_generated_dot_todo__service__pb2.SearchTodoMessage.FromString,
-                    response_serializer=api_dot_generated_dot_todo__service__pb2.empty.SerializeToString,
+                    response_serializer=api_dot_generated_dot_todo__service__pb2.emptyTodo.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -141,7 +141,7 @@ class TodoServices(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/organiza_ai.TodoServices/getAllTodo',
-            api_dot_generated_dot_todo__service__pb2.empty.SerializeToString,
+            api_dot_generated_dot_todo__service__pb2.emptyTodo.SerializeToString,
             api_dot_generated_dot_todo__service__pb2.TodoResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -193,6 +193,6 @@ class TodoServices(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/organiza_ai.TodoServices/removeTodo',
             api_dot_generated_dot_todo__service__pb2.SearchTodoMessage.SerializeToString,
-            api_dot_generated_dot_todo__service__pb2.empty.FromString,
+            api_dot_generated_dot_todo__service__pb2.emptyTodo.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
