@@ -29,7 +29,7 @@ class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
     def editTodo(self, request, context):
         updateTodo(int_id=request.id,
                    str_title=request.title)
-        result = selectOneNote(id=request.id)[0]
+        result = selectOneTodo(id=request.id)[0]
         todo = todo_service_pb2.TodoMessage(id=result[0], title=result[1])
         return todo
 
