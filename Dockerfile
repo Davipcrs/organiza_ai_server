@@ -1,3 +1,9 @@
+# Build flutter web.
+FROM debian:latest as web-build-env
+# Copy the flutter app to the Nginx in port 80 or 443
+# Add Envoy gRPC support
+
+
 FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -45,7 +51,6 @@ COPY ./docker_entrypoint.sh /app/server
 
 WORKDIR /app/server
 RUN pip3 install -r ./requirements.txt
-RUN ls -la
 ## Volumes
 
 ## Flutter Web App Config
@@ -54,11 +59,20 @@ RUN ls -la
 
 ## Envoy Config
 
+COPY ./envoy.yaml /app/proxy
+WORKDIR /app/proxy
+
+RUN envoy --version
+
 ## Ports
 
 EXPOSE 80
 EXPOSE 443
+EXPOSE 9901
 EXPOSE 50051
+EXPOSE 50052
+
+WORKDIR /app/server
 
 RUN chmod +x /app/server/docker_entrypoint.sh
 ENTRYPOINT [ "/app/server/docker_entrypoint.sh" ]

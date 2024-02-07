@@ -91,6 +91,6 @@ def serve():
         NotesServicesServicer(), server)
     todo_service_pb2_grpc.add_TodoServicesServicer_to_server(
         TodoServicesServicer(), server)
-    server.add_insecure_port("0.0.0.0:50051")
+    server.add_insecure_port("0.0.0.0:50052")
     server.start()
     server.wait_for_termination()
