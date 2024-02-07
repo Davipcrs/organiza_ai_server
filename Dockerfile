@@ -1,5 +1,11 @@
 FROM ubuntu:latest
-ENV DEBIAN_FRONTEND=noninteractive
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV DATABASE_HOST=localhost
+ENV DATABASE_PORT=5432
+ENV DATABASE_USER=postgres
+ENV DATABASE_PWD=postgres
+
 RUN apt-get upgrade -y
 RUN apt-get update -y
 RUN apt-get install python3 python3-pip libpq-dev -y
@@ -18,23 +24,28 @@ RUN apt-get install -y getenvoy-envoy
 ## Directories
 
 RUN mkdir /app
-RUN mkdir /app/api
+RUN mkdir /app/server
+RUN mkdir /app/server/api
+RUN mkdir /app/server/database
+RUN mkdir /app/server/models
 RUN mkdir /app/web
 RUN mkdir /app/proxy
 
 ## gRPC server copies
 
-COPY ./api/ /app/api
-COPY ./database/ /app/api
-COPY ./models/ /app/api
-COPY ./main.py /app/api
-COPY ./requirements.txt /app/api
+COPY ./api/ /app/server/api
+COPY ./database/ /app/server/database
+COPY ./models/ /app/server/models
+COPY ./main.py /app/server
+COPY ./__init__.py /app/server
+COPY ./requirements.txt /app/server
+COPY ./docker_entrypoint.sh /app/server
 
 ## pip install
 
-WORKDIR /app/api
+WORKDIR /app/server
 RUN pip3 install -r ./requirements.txt
-
+RUN ls -la
 ## Volumes
 
 ## Flutter Web App Config
@@ -48,3 +59,6 @@ RUN pip3 install -r ./requirements.txt
 EXPOSE 80
 EXPOSE 443
 EXPOSE 50051
+
+RUN chmod +x /app/server/docker_entrypoint.sh
+ENTRYPOINT [ "/app/server/docker_entrypoint.sh" ]

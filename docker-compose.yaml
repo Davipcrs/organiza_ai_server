@@ -1,1 +1,13 @@
+version: '3.1'
 
+services:
+
+  grpc:
+    image: grpc-organiza_ai
+    ports:
+      - 50051:50051
+    restart: always
+    environment:
+      - DATABASE_PWD=example
+      - DATABASE_USER=root
+      - DATABASE_HOST=192.168.0.51
