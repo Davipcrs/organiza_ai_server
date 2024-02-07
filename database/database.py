@@ -1,5 +1,5 @@
 import os
-from sqlalchemy import create_engine
+from sqlalchemy import Engine, create_engine
 # from dotenv import load_dotenv, find_dotenv
 from models.note import NoteModel
 from models.todo import TodoModel
@@ -19,6 +19,8 @@ _DATABASE_STRING_CONNECTION = "postgresql+psycopg2://{user}:{pwd}@{host}:{port}/
 )
 
 ENGINE = create_engine(_DATABASE_STRING_CONNECTION)
+
+# while not isinstance(ENGINE, Engine):
 
 
 def initDatabase():

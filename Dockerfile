@@ -16,6 +16,8 @@ RUN apt-get upgrade -y
 RUN apt-get update -y
 RUN apt-get install python3 python3-pip libpq-dev -y
 RUN apt-get install nginx -y
+# pg_isready command
+RUN apt-get install postgresql-client -y
 
 ## ENVOY INSTALL
 

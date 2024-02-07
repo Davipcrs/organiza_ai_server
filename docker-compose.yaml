@@ -1,17 +1,26 @@
 version: '3.1'
 
 services:
-
-  grpc:
-    image: grpc-organiza_ai
+  organiza_ai_db:
+    image: postgres
     ports:
-      - 50051:50051
-      - 80:80
-      - 443:443
-      - 50052:50052
-      - 9901:9901
+      - 5432:5432
     restart: always
     environment:
-      - DATABASE_PWD=example
-      - DATABASE_USER=root
-      - DATABASE_HOST=192.168.0.51
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_USER=root
+      - POSTGRES_DB=organiza_ai
+
+  organiza_ai:
+    image: grpc-organiza_ai
+    ports:
+      - 50051:50051 # Mobile and Desktop gRPC port
+      - 80:80 # Web App access port via nginx (http)
+      - 443:443 # Web App access port via nginx (https)
+    restart: always
+    environment:
+      - DATABASE_PWD=example # Same as the POSTGRES_PASSWORD
+      - DATABASE_USER=root # Same as the POSTGRES_USER
+      - DATABASE_HOST=192.168.0.51 # Must be ip or hostname as localhost reefer to the container itself
+    depends_on:
+      - organiza_ai_db
