@@ -21,19 +21,23 @@ RUN mkdir /app
 RUN mkdir /app/api
 RUN mkdir /app/web
 RUN mkdir /app/proxy
+
+## gRPC server copies
+
 COPY ./api/ /app/api
 COPY ./database/ /app/api
 COPY ./models/ /app/api
 COPY ./main.py /app/api
 COPY ./requirements.txt /app/api
-WORKDIR /app/api
 
 ## pip install
 
+WORKDIR /app/api
 RUN pip3 install -r ./requirements.txt
 
 ## Volumes
 
+## Flutter Web App Config
 
 ## Nginx Config
 
