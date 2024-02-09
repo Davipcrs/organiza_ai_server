@@ -8,4 +8,14 @@ This backend server is responsible to create the Tables for the database, querin
 gRPC protocol. In the /database folder you can see the code for the quering. In /models folders is the Table definition. In the /api is the gRPC
 code, the .proto file and auto-generated files from the "protoc". Is recomended to use venv to run locally this code.  
 
-Look at the docker-compose.yaml file for deploying the server.
+## Deploying
+
+clone this repo: <https://github.com/Davipcrs/organiza_ai_server.git>  
+run: sudo chmod +x ./install.sh  
+run: ./install.sh  
+
+(Bugs that i was trying to resolve)
+For deploying this application is necessary:  
+    - disable the system firewall as flutter tends to connect to random ports for the gRPC.
+    - the server IP needs to be changed in the docker-compose.yaml before running the ./install.sh
+    - for the web-ui works need to point a DNS name "organiza_ai.com" to the server IP.
