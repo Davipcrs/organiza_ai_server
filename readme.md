@@ -10,13 +10,26 @@ code, the .proto file and auto-generated files from the "protoc". Is recomended 
 
 ## Deploying
 
-clone this repo: git clone <https://github.com/Davipcrs/organiza_ai_server.git>  
-run: cd organiza_ai_server  
-run: sudo chmod +x ./install.sh  
-run: ./install.sh  
+clone this repo  
+
+```bash
+ git clone <https://github.com/Davipcrs/organiza_ai_server.git>  
+```
+
+change the directory and give permissions  
+
+```bash
+cd organiza_ai_server  
+sudo chmod +x ./install.sh  
+```
+
+the server IP needs to be changed in the docker-compose.yaml before running the ./install.sh  
+
+```bash
+./install.sh  
+```
 
 (Bugs that i was trying to resolve)  
-For deploying this application is necessary:  
+For deploying this application in Web is necessary:  
     - disable the system firewall as flutter tends to connect to random ports for the gRPC.  
-    - the server IP needs to be changed in the docker-compose.yaml before running the ./install.sh  
-    - for the web-ui works need to point a DNS name "organiza_ai.com" to the server IP.  
+    - need to point a DNS name "organiza_ai.com" to the server IP.  
