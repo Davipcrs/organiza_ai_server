@@ -31,7 +31,22 @@ The server IP needs to be changed in the docker-compose.yaml before running the 
 ./install.sh  
 ```
 
-(Bugs that i was trying to resolve)  
+Open ports for the server to Work!  
+
+```bash
+# in ubuntu:
+sudo ufw allow 80, 443, 50051, 50052
+
+# in RHEL based linux (Firewalld):
+sudo firewall-cmd --permanent --add-port={80/tcp,443/tcp,50051/tcp,50052/tcp}
+sudo firewall-cmd --reload
+
+# You can override the ports on the docker compose and then override here.
+# If your linux distro do not use these firewalls service look into how open that ports.
+```
+
+## (Bugs that i was trying to resolve)  
+
 For deploying this application in Web is necessary:  
     - disable the system firewall as flutter tends to connect to random ports for the gRPC.  
     - need to point a DNS name "organiza_ai.com" to the server IP.  
