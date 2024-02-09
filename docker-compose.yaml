@@ -21,8 +21,8 @@ services:
     environment:
       - DATABASE_PWD=example # Same as the POSTGRES_PASSWORD
       - DATABASE_USER=root # Same as the POSTGRES_USER
-      - DATABASE_HOST=192.168.0.51 # Must be ip or hostname, as localhost reefer to the container itself
+      - DATABASE_HOST=192.168.0.52 # Must be ip or hostname, as localhost reefer to the container itself
     depends_on:
       - organiza_ai_db
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - "organiza_ai.com:172.0.0.1" # Put the server IP
