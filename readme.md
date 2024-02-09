@@ -10,7 +10,8 @@ code, the .proto file and auto-generated files from the "protoc". Is recomended 
 
 ## Deploying
 
-clone this repo: <https://github.com/Davipcrs/organiza_ai_server.git>  
+clone this repo: git clone <https://github.com/Davipcrs/organiza_ai_server.git>
+run: cd organiza_ai_server
 run: sudo chmod +x ./install.sh  
 run: ./install.sh  
 
