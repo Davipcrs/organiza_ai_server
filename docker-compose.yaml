@@ -14,7 +14,8 @@ services:
   organiza_ai:
     image: grpc-organiza_ai
     ports:
-      - 50051:50051 # Mobile and Desktop gRPC port
+      - 50052:50052 # mobile and desktop gRPC port
+      - 50051:50051 # web gRPC port
       - 80:80 # Web App access port via nginx (http)
       - 443:443 # Web App access port via nginx (https)
     restart: always
