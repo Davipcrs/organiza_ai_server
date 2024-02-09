@@ -10,20 +10,22 @@ code, the .proto file and auto-generated files from the "protoc". Is recomended 
 
 ## Deploying
 
-clone this repo  
+Clone this repo  
 
 ```bash
- git clone <https://github.com/Davipcrs/organiza_ai_server.git>  
+ git clone https://github.com/Davipcrs/organiza_ai_server.git  
 ```
 
-change the directory and give permissions  
+Change the directory and give permissions  
 
 ```bash
 cd organiza_ai_server  
 sudo chmod +x ./install.sh  
 ```
 
-the server IP needs to be changed in the docker-compose.yaml before running the ./install.sh  
+##### CAUTION
+
+The server IP needs to be changed in the docker-compose.yaml before running the ./install.sh  
 
 ```bash
 ./install.sh  
