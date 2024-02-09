@@ -23,7 +23,7 @@ cd organiza_ai_server
 sudo chmod +x ./install.sh  
 ```
 
-##### CAUTION
+**CAUTION!**
 
 The server IP needs to be changed in the docker-compose.yaml before running the ./install.sh  
 
