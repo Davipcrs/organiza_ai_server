@@ -1,8 +1,27 @@
 # Build flutter web.
 FROM debian:latest as web-build-env
+ARG DEBIAN_FRONTEND=noninteractive
 # Copy the flutter app to the Nginx in port 80 or 443
 # Add Envoy gRPC support
 
+RUN apt-get upgrade -y
+RUN apt-get update -y
+RUN apt-get install git -y
+RUN apt-get install curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback lib32stdc++6 python3 sed -y
+RUN apt-get clean
+
+RUN git clone https://github.com/flutter/flutter.git /usr/local/flutter
+
+ENV PATH="${PATH}:/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin"
+
+RUN flutter doctor -v
+RUN flutter channel master
+RUN flutter upgrade
+
+RUN mkdir /app
+RUN git clone https://github.com/Davipcrs/organiza_ai.git /app
+WORKDIR /app
+RUN flutter build web
 
 FROM ubuntu:latest
 
@@ -15,7 +34,7 @@ ENV DATABASE_PWD=postgres
 RUN apt-get upgrade -y
 RUN apt-get update -y
 RUN apt-get install python3 python3-pip libpq-dev -y
-RUN apt-get install nginx -y
+# RUN apt-get install nginx -y
 # pg_isready command
 RUN apt-get install postgresql-client -y
 
@@ -55,9 +74,13 @@ WORKDIR /app/server
 RUN pip3 install -r ./requirements.txt
 ## Volumes
 
-## Flutter Web App Config
-
-## Nginx Config
+## Nginx Config and Flutter Web App Config
+#COPY ./default /etc/nginx/sites-enabled/default
+#RUN nginx -V
+#RUN cat /etc/nginx/sites-enabled/default
+COPY --from=web-build-env /app/build/web /app/web
+#RUN service nginx restart
+#RUN service nginx reload
 
 ## Envoy Config
 
@@ -73,6 +96,8 @@ EXPOSE 443
 EXPOSE 9901
 EXPOSE 50051
 EXPOSE 50052
+
+RUN apt-get clean
 
 WORKDIR /app/server
 
