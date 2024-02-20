@@ -28,6 +28,12 @@ headless_install(){
 
 echo "Thanks for deploying Organiza_ai server in your linux system!"
 echo \n
+echo "Check the docker-compose.yaml file in the directory $PWD"
+echo \n
+cat $PWD/docker-compose.yaml
+echo \n
+read -p "The host settings are correct? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
+echo \n
 echo "Installing the server!"
 read -p "You want to install the gRPC Web Support? (Y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || headless_install
 web_install
