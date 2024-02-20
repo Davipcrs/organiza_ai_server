@@ -6,4 +6,5 @@ check_pg_ready(){
 sleep 5
 if check_pg_ready; then
     python3 /app/server/main.py
+
 fi
