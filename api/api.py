@@ -1,10 +1,10 @@
 from concurrent import futures
 import grpc
 from api.generated import notes_service_pb2_grpc, notes_service_pb2, todo_service_pb2, todo_service_pb2_grpc, appointment_service_pb2, appointment_service_pb2_grpc
-from database.insert import insertNote, insertTodo
-from database.select import selectAllNotes, selectAllTodos, selectOneNote, selectOneTodo
-from database.delete import deleteNote, deleteTodo
-from database.update import updateNote, updateTodo
+from database.insert import insertNote, insertTodo, insertAppointment
+from database.select import selectAllNotes, selectAllTodos, selectOneAppointment, selectOneNote, selectOneTodo, selectAllAppointments
+from database.delete import deleteNote, deleteTodo, deleteAppointment
+from database.update import updateNote, updateTodo, updateAppointment
 
 
 class TodoServicesServicer(todo_service_pb2_grpc.TodoServicesServicer):
@@ -87,21 +87,56 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
 
 class AppointmentServicesServicer(appointment_service_pb2_grpc.AppointmentServicesServicer):
     def getAppointment(self, request, context):
-        return super().getAppointment(request, context)
+        result = selectOneAppointment(request.id)[0]
+        appointment = appointment_service_pb2.AppointmentMessage(
+            id=result[0], title=result[1], desc=result[2], start=result[3], end=result[4], color=result[5], canceled=result[6])
+        return appointment
 
     def getAllAppointments(self, request, context):
-        return super().getAllAppointments(request, context)
+        allAppointments = selectAllAppointments()
+
+        message = appointment_service_pb2.AppointmentResponse()
+        for appointment in allAppointments:
+            auxiliar = appointment_service_pb2.AddAppointmentMessage(
+                id=appointment[0],
+                title=appointment[1],
+                desc=appointment[2],
+                start=appointment[3],
+                end=appointment[4],
+                color=appointment[5],
+                canceled=appointment[6]
+
+            )
+            message.appointment.append(auxiliar)
+
+        return message
 
     def addAppointment(self, request, context):
-        return super().addAppointment(request, context)
+        id = insertAppointment(str_title=request.title,
+                               str_desc=request.desc,
+                               str_end=request.end,
+                               str_start=request.start,
+                               int_color=request.color,
+                               bool_canceled=request.canceled
+                               )[0][0]
+
+        return notes_service_pb2.SearchNoteRequest(id=id)
 
     def editAppointment(self, request, context):
-        return super().editAppointment(request, context)
+        updateAppointment(int_id=request.id, str_title=request.title,
+                          str_desc=request.desc,
+                          str_end=request.end,
+                          str_start=request.start,
+                          int_color=request.color,
+                          bool_canceled=request.canceled)
+        result = selectOneAppointment(id=request.id)[0]
+        appointment = appointment_service_pb2.AppointmentMessage(
+            id=result[0], title=result[1], desc=result[2], start=result[3], end=result[4], color=result[5], canceled=result[6])
+        return appointment
 
     def removeAppointment(self, request, context):
-        return super().removeAppointment(request, context)
-
-    pass
+        deleteAppointment(request.id)
+        return appointment_service_pb2.emptyAppointment()
 
 
 def serve():
@@ -110,6 +145,8 @@ def serve():
         NotesServicesServicer(), server)
     todo_service_pb2_grpc.add_TodoServicesServicer_to_server(
         TodoServicesServicer(), server)
+    appointment_service_pb2_grpc.add_AppointmentServicesServicer_to_server(
+        AppointmentServicesServicer(), server)
     server.add_insecure_port("0.0.0.0:50052")
     server.start()
     server.wait_for_termination()
