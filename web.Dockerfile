@@ -67,7 +67,7 @@ COPY ./models/ /app/server/models
 COPY ./main.py /app/server
 COPY ./__init__.py /app/server
 COPY ./requirements.txt /app/server
-COPY ./docker_entrypoint.sh /app/server
+COPY ./web_docker_entrypoint.sh /app/server
 
 ## pip install
 
@@ -103,5 +103,5 @@ RUN apt-get clean
 
 WORKDIR /app/server
 
-RUN chmod +x /app/server/docker_entrypoint.sh
-ENTRYPOINT [ "/app/server/docker_entrypoint.sh" ]
+RUN chmod +x /app/server/web_docker_entrypoint.sh
+ENTRYPOINT [ "/app/server/web_docker_entrypoint.sh" ]
