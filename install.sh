@@ -4,7 +4,7 @@
 web_install(){
     mv $PWD/docker/web/Dockerfile ./Dockerfile
     echo "building image..."
-    sudo docker build . -t grpc-organiza_ai --no-cache --progress=plain
+    sudo docker build -f $PWD/Dockerfile -t grpc-organiza_ai --no-cache --progress=plain .
     echo "Image builded..."
     echo \n
     echo "Running docker compose"
@@ -15,7 +15,7 @@ web_install(){
 headless_install(){
     mv $PWD/docker/server/Dockerfile ./Dockerfile
     echo "building image..."
-    sudo docker build server.Dockerfile -t grpc-organiza_ai --no-cache --progress=plain
+    sudo docker build -f $PWD/Dockerfile -t grpc-organiza_ai --no-cache --progress=plain .
     echo "Image builded..."
     echo \n
     echo "Running docker compose"
