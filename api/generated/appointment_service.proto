@@ -1,0 +1,42 @@
+syntax="proto3";
+
+package organiza_ai;
+
+
+service AppointmentServices{
+    rpc getAppointment(SearchAppointmentRequest) returns (AppointmentMessage);
+    rpc getAllAppointments(emptyAppointment) returns (AppointmentResponse);
+    rpc addAppointment(AddAppointmentMessage) returns (SearchAppointmentRequest);
+    rpc removeAppointment(SearchAppointmentRequest) returns (emptyAppointment);
+    rpc editAppointment(AppointmentMessage) returns (AppointmentMessage);
+}
+
+
+message emptyAppointment{}
+
+message AppointmentMessage{
+    int64 id = 1;
+    string title = 2;
+    string desc = 3;
+    string start = 4;
+    string end = 5;
+    bool canceled = 6;
+    int64 color = 7;
+}
+
+message AppointmentResponse{
+    repeated AppointmentMessage appointment = 1;
+}
+
+message AddAppointmentMessage{
+    string title = 1;
+    string desc = 2;
+    string start = 3;
+    string end = 4;
+    bool canceled = 5;
+    int64 color = 6;
+}
+
+message SearchAppointmentRequest{
+    int64 id = 1;
+}

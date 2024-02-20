@@ -1,6 +1,6 @@
 from concurrent import futures
 import grpc
-from api.generated import notes_service_pb2_grpc, notes_service_pb2, todo_service_pb2, todo_service_pb2_grpc
+from api.generated import notes_service_pb2_grpc, notes_service_pb2, todo_service_pb2, todo_service_pb2_grpc, appointment_service_pb2, appointment_service_pb2_grpc
 from database.insert import insertNote, insertTodo
 from database.select import selectAllNotes, selectAllTodos, selectOneNote, selectOneTodo
 from database.delete import deleteNote, deleteTodo
@@ -83,6 +83,25 @@ class NotesServicesServicer(notes_service_pb2_grpc.NotesServicesServicer):
         note = notes_service_pb2.NoteMessage(
             id=result[0], title=result[1], desc=result[2], created=result[3], deadLine=result[4])
         return note
+
+
+class AppointmentServicesServicer(appointment_service_pb2_grpc.AppointmentServicesServicer):
+    def getAppointment(self, request, context):
+        return super().getAppointment(request, context)
+
+    def getAllAppointments(self, request, context):
+        return super().getAllAppointments(request, context)
+
+    def addAppointment(self, request, context):
+        return super().addAppointment(request, context)
+
+    def editAppointment(self, request, context):
+        return super().editAppointment(request, context)
+
+    def removeAppointment(self, request, context):
+        return super().removeAppointment(request, context)
+
+    pass
 
 
 def serve():
