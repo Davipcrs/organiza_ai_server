@@ -3,6 +3,7 @@ from sqlalchemy import Engine, create_engine
 # from dotenv import load_dotenv, find_dotenv
 from models.note import NoteModel
 from models.todo import TodoModel
+from models.appointment import AppointmentModel
 # Docker mods
 # load_dotenv(find_dotenv(), override=True)
 
@@ -27,3 +28,4 @@ def initDatabase():
     eng = ENGINE
     NoteModel.__table__.create(bind=eng, checkfirst=True)
     TodoModel.__table__.create(bind=eng, checkfirst=True)
+    AppointmentModel.__table__.create(bind=eng, checkfirst=True)
