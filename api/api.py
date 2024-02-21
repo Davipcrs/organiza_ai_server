@@ -97,7 +97,7 @@ class AppointmentServicesServicer(appointment_service_pb2_grpc.AppointmentServic
 
         message = appointment_service_pb2.AppointmentResponse()
         for appointment in allAppointments:
-            auxiliar = appointment_service_pb2.AddAppointmentMessage(
+            auxiliar = appointment_service_pb2.AppointmentMessage(
                 id=appointment[0],
                 title=appointment[1],
                 desc=appointment[2],
