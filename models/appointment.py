@@ -1,6 +1,6 @@
 from database.utils import BASE
 from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import Integer, String, Text, Boolean
+from sqlalchemy import BigInteger, Integer, String, Text, Boolean
 
 
 class AppointmentModel(BASE):
@@ -12,5 +12,5 @@ class AppointmentModel(BASE):
     str_desc: Mapped[str] = mapped_column(Text())
     str_start: Mapped[str] = mapped_column(String(100))
     str_end: Mapped[str] = mapped_column(String(100))
-    int_color: Mapped[int] = mapped_column(Integer)
+    int_color: Mapped[int] = mapped_column(BigInteger)
     bool_canceled: Mapped[bool] = mapped_column(Boolean)
