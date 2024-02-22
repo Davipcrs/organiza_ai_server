@@ -29,7 +29,7 @@ COPY ./requirements.txt /app/server
 COPY ./server_docker_entrypoint.sh /app/server
 
 WORKDIR /app/server
-RUN pip3 install -r ./requirements.txt
+RUN pip3 install -r ./requirements.txt  --break-system-packages
 
 EXPOSE 50052
 
