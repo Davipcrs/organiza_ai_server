@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV DATABASE_HOST=localhost
@@ -29,7 +29,7 @@ COPY ./requirements.txt /app/server
 COPY ./server_docker_entrypoint.sh /app/server
 
 WORKDIR /app/server
-RUN pip3 install -r ./requirements.txt  --break-system-packages
+RUN pip3 install -r ./requirements.txt
 
 EXPOSE 50052
 
