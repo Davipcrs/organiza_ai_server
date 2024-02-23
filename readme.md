@@ -13,7 +13,7 @@ Is recomended to use venv to run locally this code.
 
 ## Deploying
 
-(For using the UI check the UI Repo: <https://github.com/Davipcrs/organiza_ai/tree/master>)  
+(For using the UI check the UI Repo: <https://github.com/Davipcrs/organiza_ai/>)  
 
 Clone this repo  
 
