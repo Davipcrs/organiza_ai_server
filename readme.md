@@ -13,10 +13,12 @@ Is recomended to use venv to run locally this code.
 
 ## Deploying
 
+(For using the UI check the UI Repo: <https://github.com/Davipcrs/organiza_ai/tree/master>)  
+
 Clone this repo  
 
 ```bash
- git clone https://github.com/Davipcrs/organiza_ai_server.git  
+git clone https://github.com/Davipcrs/organiza_ai_server.git  
 ```
 
 Change the directory and give permissions  
